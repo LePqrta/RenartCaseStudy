@@ -1,0 +1,156 @@
+.product-carousel-container {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.product-carousel {
+  overflow: hidden;
+  margin: 0 60px;
+}
+
+.product-grid {
+  display: flex;
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-page {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  flex-shrink: 0;
+  padding: 0 15px;
+  box-sizing: border-box;
+}
+
+/* Carousel Navigation */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--color-background);
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+  color: var(--color-text-secondary);
+}
+
+.carousel-btn:hover {
+  background-color: var(--color-click);
+  color: white;
+  border-color: var(--color-click);
+}
+
+.carousel-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--color-background);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+.carousel-btn-prev {
+  left: 0;
+}
+
+.carousel-btn-next {
+  right: 0;
+}
+
+/* Carousel Indicators */
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 30px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-border);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+  background-color: var(--color-click);
+}
+
+/* No Products Message */
+.no-products {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--color-light-gray);
+  border-radius: 12px;
+  margin-bottom: 30px;
+}
+
+.no-products p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  color: var(--color-text-secondary);
+  margin-bottom: 20px;
+}
+
+.reset-filters-btn {
+  background: var(--color-click);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reset-filters-btn:hover {
+  background: #B5956A;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .product-carousel {
+    margin: 0 50px;
+  }
+  
+  .product-page {
+    gap: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-carousel {
+    margin: 0 40px;
+  }
+  
+  .product-page {
+    gap: 20px;
+  }
+  
+  .carousel-btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-carousel {
+    margin: 0 30px;
+  }
+  
+  .product-page {
+    gap: 15px;
+    justify-content: center;
+  }
+}

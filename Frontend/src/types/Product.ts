@@ -1,3 +1,4 @@
+// Product interface matching backend response
 export interface Product {
   name: string;
   popularityScore: number;
@@ -11,9 +12,17 @@ export interface Product {
   popularityScoreOutOfFive: number;
 }
 
-export type ColorType = 'yellow' | 'rose' | 'white';
+// Color options
+export const COLOR_OPTIONS = {
+  'yellow': '#EBCA97',
+  'white': '#D9D9D9',
+  'rose': '#E1A4A9'
+} as const;
 
-export interface FilterParams {
+export type ColorOption = keyof typeof COLOR_OPTIONS;
+
+// API Filter Parameters
+export interface ApiFilterParams {
   minPrice?: number;
   maxPrice?: number;
   minPopularity?: number;
