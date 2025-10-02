@@ -99,3 +99,6 @@ export class ProductService {
     }
   }
 }
+
+// Export both named and default export for compatibility
+export default ProductService;
