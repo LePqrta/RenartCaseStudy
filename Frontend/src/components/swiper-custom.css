@@ -1,0 +1,84 @@
+/* Swiper CSS Reset and Custom Styles */
+.swiper {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.swiper-wrapper {
+  display: flex;
+}
+
+.swiper-slide {
+  flex-shrink: 0;
+  height: 100%;
+  position: relative;
+  transition-property: transform;
+  width: auto;
+}
+
+/* Dynamic width based on screen size */
+@media (min-width: 480px) {
+  .swiper-slide {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (min-width: 768px) {
+  .swiper-slide {
+    width: calc(33.333% - 17px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .swiper-slide {
+    width: calc(25% - 23px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .swiper-slide {
+    width: calc(20% - 24px);
+  }
+}
+
+@media (min-width: 1536px) {
+  .swiper-slide {
+    width: calc(16.666% - 25px);
+  }
+}
+
+@media (min-width: 1920px) {
+  .swiper-slide {
+    width: calc(14.285% - 26px);
+  }
+}
+
+.swiper-pagination {
+  position: static !important;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.swiper-pagination-bullet {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ddd;
+  opacity: 1;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.swiper-pagination-bullet-active {
+  background: #666;
+}
+
+.swiper-horizontal > .swiper-pagination-bullets, 
+.swiper-pagination-bullets.swiper-pagination-horizontal {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
