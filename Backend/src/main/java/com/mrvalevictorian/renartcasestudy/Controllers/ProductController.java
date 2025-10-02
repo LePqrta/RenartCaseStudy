@@ -29,8 +29,8 @@ public class ProductController {
         // Validate individual parameters
         if (minPrice != null && minPrice < 0) return ResponseEntity.badRequest().build();
         if (maxPrice != null && maxPrice < 0) return ResponseEntity.badRequest().build();
-        if (minPopularity != null && (minPopularity < 0 || minPopularity > 1)) return ResponseEntity.badRequest().build();
-        if (maxPopularity != null && (maxPopularity < 0 || maxPopularity > 1)) return ResponseEntity.badRequest().build();
+        if (minPopularity != null && (minPopularity < 0 || minPopularity > 5)) return ResponseEntity.badRequest().build();
+        if (maxPopularity != null && (maxPopularity < 0 || maxPopularity > 5)) return ResponseEntity.badRequest().build();
 
         // Validate ranges
         if (minPrice != null && maxPrice != null && minPrice > maxPrice) return ResponseEntity.badRequest().build();
