@@ -1,7 +1,7 @@
 import type { Product, ApiFilterParams } from '../types/Product';
 
-// API service for backend integration
-export class ProductService {
+
+export class productService {
   private static baseUrl = 'http://localhost:8080';
 
   private static buildQueryParams(filters?: ApiFilterParams): string {
@@ -101,4 +101,4 @@ export class ProductService {
 }
 
 // Export both named and default export for compatibility
-export default ProductService;
+export default productService;
