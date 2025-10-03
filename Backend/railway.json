@@ -4,6 +4,6 @@
     "buildCommand": "chmod +x mvnw && ./mvnw clean package -DskipTests"
   },
   "deploy": {
-    "startCommand": "java -Dserver.port=$PORT -jar target/*.jar"
+    "startCommand": "java -Djava.runtime.version=21 -Dserver.port=$PORT -jar target/*.jar"
   }
 }
