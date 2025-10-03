@@ -5,7 +5,7 @@ import { DEFAULT_FILTERS } from '../types/Filter';
 import ProductCard from './ProductCard';
 import LoadingSpinner from './LoadingSpinner';
 import ProductFilter from './ProductFilter';
-import ProductService from '../services/ProductService';
+import ProductService from '../services/productService';
 import './ProductCarousel.css';
 
 const ProductCarousel: React.FC = () => {
