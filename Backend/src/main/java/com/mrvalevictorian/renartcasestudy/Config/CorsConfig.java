@@ -9,7 +9,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:5173", "https://renart-case-study-y9xg.vercel.app")                .allowedMethods("GET", "POST", "PUT", "DELETE");
+                .allowedOrigins("http://localhost:5173", "https://renart-case-study-ipkb.vercel.app/")                .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 }
 
