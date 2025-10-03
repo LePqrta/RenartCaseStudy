@@ -1,10 +1,9 @@
 {
   "build": {
     "builder": "nixpacks",
-    "buildCommand": "./mvnw clean package -DskipTests"
+    "buildCommand": "chmod +x mvnw && ./mvnw clean package -DskipTests"
   },
   "deploy": {
-    "startCommand": "java -Dserver.port=$PORT -jar target/*.jar",
-    "restartPolicyType": "ON_FAILURE"
+    "startCommand": "java -Dserver.port=$PORT -jar target/*.jar"
   }
 }
