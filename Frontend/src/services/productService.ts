@@ -2,7 +2,7 @@ import type { Product, ApiFilterParams } from '../types/Product';
 
 
 export class productService {
-  private static baseUrl = 'https://renartcasestudy-production.up.railway.app';
+  private static baseUrl = 'http://localhost:8080';
 
   private static buildQueryParams(filters?: ApiFilterParams): string {
     if (!filters) return '';
