@@ -1,10 +1,10 @@
-package com.mrvalevictorian.renartcasestudy;
+package com.mrvalevictorian.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RenartCaseStudyApplicationTests {
+class BackendApplicationTests {
 
     @Test
     void contextLoads() {
