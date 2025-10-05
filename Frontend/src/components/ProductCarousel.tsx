@@ -16,6 +16,7 @@ const ProductCarousel: React.FC = () => {
   const [filters, setFilters] = useState<FilterOptions>(DEFAULT_FILTERS);
   const [isFilterVisible, setIsFilterVisible] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const isProgrammaticScrollRef = useRef(false);
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -52,6 +53,48 @@ const ProductCarousel: React.FC = () => {
       setCurrentSlide(Math.max(0, totalPages - 1));
     }
   }, [productsPerPage, totalPages, currentSlide]);
+
+  // Sync scroll position when currentSlide changes (from arrows/keyboard)
+  useEffect(() => {
+    if (carouselRef.current) {
+      isProgrammaticScrollRef.current = true;
+      const carousel = carouselRef.current;
+      const scrollWidth = carousel.scrollWidth;
+      const targetScroll = (scrollWidth / totalPages) * currentSlide;
+      carousel.scrollTo({
+        left: targetScroll,
+        behavior: 'smooth'
+      });
+      
+      // Reset flag after scroll animation completes
+      setTimeout(() => {
+        isProgrammaticScrollRef.current = false;
+      }, 500);
+    }
+  }, [currentSlide, totalPages]);
+
+  // Sync currentSlide when scrollbar is used
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (!carousel) return;
+
+    const handleScroll = () => {
+      // Ignore scroll events triggered by programmatic scrolling
+      if (isProgrammaticScrollRef.current) return;
+      
+      const scrollLeft = carousel.scrollLeft;
+      const scrollWidth = carousel.scrollWidth;
+      const pageWidth = scrollWidth / totalPages;
+      const newSlide = Math.round(scrollLeft / pageWidth);
+      
+      if (newSlide !== currentSlide && newSlide >= 0 && newSlide < totalPages) {
+        setCurrentSlide(newSlide);
+      }
+    };
+
+    carousel.addEventListener('scroll', handleScroll);
+    return () => carousel.removeEventListener('scroll', handleScroll);
+  }, [currentSlide, totalPages]);
 
   const convertFiltersToApiParams = (filterOptions: FilterOptions): ApiFilterParams => {
     const apiParams: ApiFilterParams = {};
@@ -105,7 +148,6 @@ const ProductCarousel: React.FC = () => {
 
   const handleProductClick = (product: Product) => {
     console.log('Product clicked:', product);
-
     alert(`You clicked on: ${product.name}`);
   };
 
@@ -117,33 +159,6 @@ const ProductCarousel: React.FC = () => {
   const handleToggleFilter = useCallback(() => {
     setIsFilterVisible(prev => !prev);
   }, []);
-
-
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
-
-  const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-
-  const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
-
-    if (isLeftSwipe) {
-      nextSlide();
-    } else if (isRightSwipe) {
-      previousSlide();
-    }
-  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -203,24 +218,14 @@ const ProductCarousel: React.FC = () => {
         <div 
           className="product-carousel"
           ref={carouselRef}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
         >
           <div 
             className="product-grid"
-            style={{
-              transform: `translateX(-${currentSlide * (100 / totalPages)}%)`,
-              width: `${totalPages * 100}%`
-            }}
           >
             {Array.from({ length: totalPages }, (_, pageIndex) => (
               <div 
                 key={pageIndex} 
                 className="product-page"
-                style={{
-                  width: `${100 / totalPages}%`
-                }}
               >
                 {products
                   .slice(pageIndex * productsPerPage, (pageIndex + 1) * productsPerPage)

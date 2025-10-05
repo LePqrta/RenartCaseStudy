@@ -14,7 +14,7 @@ export interface Product {
 
 // Color options
 export const COLOR_OPTIONS = {
-  'yellow': '#EBCA97',
+  'yellow': '#E6CA97',
   'white': '#D9D9D9',
   'rose': '#E1A4A9'
 } as const;

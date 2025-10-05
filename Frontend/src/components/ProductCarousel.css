@@ -5,27 +5,55 @@
 }
 
 .product-carousel {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   margin: 0 60px; 
   position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  scrollbar-width: thin;
+  scrollbar-color: #999999 #E0E0E0;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.product-carousel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.product-carousel::-webkit-scrollbar-track {
+  background: #E0E0E0;
+  border-radius: 4px;
+}
+
+.product-carousel::-webkit-scrollbar-thumb {
+  background: #999999;
+  border-radius: 4px;
+}
+
+.product-carousel::-webkit-scrollbar-thumb:hover {
+  background: #666666;
 }
 
 .product-grid {
   display: flex;
-  transition: transform 0.3s ease-in-out;
-
 }
 
 .product-page {
   display: flex;
   gap: 30px;
   flex-shrink: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   justify-content: center; 
   align-items: center;
   padding: 0 20px;
   box-sizing: border-box;
   min-height: 450px;
-
+  width: 100%;
+  min-width: 100%;
 }
 
 .carousel-btn {
