@@ -59,6 +59,7 @@ RenartCaseStudy/
 - **Maven** - Dependency management
 - **Jackson** - JSON processing
 - **Railway** - Deployment platform
+- **GoldAPI** - Live gold prices
 
 ### Frontend
 - **React 19** - UI library
@@ -118,7 +119,7 @@ RenartCaseStudy/
    ```bash
    mvn install
    ```
-
+   
 3. Run the application:
    ```bash
    mvn spring-boot:run
@@ -202,15 +203,35 @@ GET /products?minPrice=100&maxPrice=500&minPopularity=3&maxPopularity=5
 
 #### Get Gold Price
 ```http
-GET /gold-price
+GET https://www.goldapi.io/api/:symbol/:currency/:date?
 ```
 
 **Response:**
 ```json
 {
-  "price": 1950.50,
-  "currency": "USD",
-  "timestamp": "2025-10-05T12:00:00Z"
+"timestamp":1759674628
+"metal":"XAU"
+"currency":"USD"
+"exchange":"FOREXCOM"
+"symbol":"FOREXCOM:XAUUSD"
+"prev_close_price":3856.395
+"open_price":3856.395
+"low_price":3838.22
+"high_price":3891.75
+"open_time":1759449600
+"price":3886.99
+"ch":30.59
+"chp":0.79
+"ask":3887.27
+"bid":3886.71
+"price_gram_24k":124.9696
+"price_gram_22k":114.5555
+"price_gram_21k":109.3484
+"price_gram_20k":104.1414
+"price_gram_18k":93.7272
+"price_gram_16k":83.3131
+"price_gram_14k":72.899
+"price_gram_10k":52.0707
 }
 ```
 
@@ -279,3 +300,4 @@ App
 - Font families: Avenir and Montserrat
 - Icons: Custom SVG icons
 - Deployment: Railway, Vercel 
+
