@@ -19,23 +19,26 @@ const ProductCarousel: React.FC = () => {
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
-  // Load products on component mount and when filters change
+
   useEffect(() => {
     loadProducts();
   }, [filters]);
 
-  // Handle responsive products per page
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
-      if (width < 480) {
+      
+      if (width < 720) {
         setProductsPerPage(1);
-      } else if (width < 768) {
-        setProductsPerPage(2);
-      } else if (width < 1200) {
-        setProductsPerPage(3);
+      } else if (width < 900) {
+        setProductsPerPage(2); // Medium tablets (iPad Mini, iPad Air portrait)
+      } else if (width < 1024) {
+        setProductsPerPage(2); // Tablets landscape, small laptops
+      } else if (width < 1280) {
+        setProductsPerPage(3); // Large tablets landscape
       } else {
-        setProductsPerPage(4);
+        setProductsPerPage(4); // Desktop
       }
     };
 
@@ -44,7 +47,6 @@ const ProductCarousel: React.FC = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Reset current slide when products per page changes
   useEffect(() => {
     if (currentSlide >= totalPages) {
       setCurrentSlide(Math.max(0, totalPages - 1));
@@ -78,7 +80,6 @@ const ProductCarousel: React.FC = () => {
       setProducts(fetchedProducts);
     } catch (error) {
       console.error('Error loading products:', error);
-      // You might want to show an error message to the user here
     } finally {
       setIsLoading(false);
     }
@@ -104,20 +105,20 @@ const ProductCarousel: React.FC = () => {
 
   const handleProductClick = (product: Product) => {
     console.log('Product clicked:', product);
-    // Here you would typically navigate to product detail page
+
     alert(`You clicked on: ${product.name}`);
   };
 
   const handleFiltersChange = useCallback((newFilters: FilterOptions) => {
     setFilters(newFilters);
-    setCurrentSlide(0); // Reset to first page when filters change
+    setCurrentSlide(0); 
   }, []);
 
   const handleToggleFilter = useCallback(() => {
     setIsFilterVisible(prev => !prev);
   }, []);
 
-  // Touch/swipe handling
+
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -144,7 +145,6 @@ const ProductCarousel: React.FC = () => {
     }
   };
 
-  // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
@@ -210,12 +210,18 @@ const ProductCarousel: React.FC = () => {
           <div 
             className="product-grid"
             style={{
-              transform: `translateX(-${currentSlide * 100}%)`,
+              transform: `translateX(-${currentSlide * (100 / totalPages)}%)`,
               width: `${totalPages * 100}%`
             }}
           >
             {Array.from({ length: totalPages }, (_, pageIndex) => (
-              <div key={pageIndex} className="product-page">
+              <div 
+                key={pageIndex} 
+                className="product-page"
+                style={{
+                  width: `${100 / totalPages}%`
+                }}
+              >
                 {products
                   .slice(pageIndex * productsPerPage, (pageIndex + 1) * productsPerPage)
                   .map((product, index) => (

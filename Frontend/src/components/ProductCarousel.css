@@ -1,28 +1,33 @@
 .product-carousel-container {
   position: relative;
   margin-bottom: 40px;
+  width: 100%;
 }
 
 .product-carousel {
   overflow: hidden;
-  margin: 0 60px;
+  margin: 0 60px; 
+  position: relative;
 }
 
 .product-grid {
   display: flex;
   transition: transform 0.3s ease-in-out;
+
 }
 
 .product-page {
   display: flex;
   gap: 30px;
-  width: 100%;
   flex-shrink: 0;
-  padding: 0 15px;
+  justify-content: center; 
+  align-items: center;
+  padding: 0 20px;
   box-sizing: border-box;
+  min-height: 450px;
+
 }
 
-/* Carousel Navigation */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -63,7 +68,6 @@
   right: 0;
 }
 
-/* Carousel Indicators */
 .carousel-indicators {
   display: flex;
   justify-content: center;
@@ -85,7 +89,6 @@
   background-color: var(--color-click);
 }
 
-/* No Products Message */
 .no-products {
   text-align: center;
   padding: 60px 20px;
@@ -119,38 +122,90 @@
 }
 
 /* Responsive Design */
-@media (max-width: 1200px) {
+
+/* Large Desktop - 4 cards */
+@media (min-width: 1280px) {
+  .product-carousel {
+    margin: 0 60px;
+  }
+  
+  .product-page {
+    gap: 30px;
+    padding: 0 20px;
+  }
+}
+
+/* Desktop and Large Tablets Landscape - 3 cards */
+@media (max-width: 1279px) {
+  .product-carousel {
+    margin: 0 55px;
+  }
+  
+  .product-page {
+    gap: 25px;
+    padding: 0 20px;
+  }
+}
+
+/* Tablets Landscape - 3 cards */
+@media (max-width: 1024px) {
   .product-carousel {
     margin: 0 50px;
   }
   
   .product-page {
-    gap: 25px;
+    gap: 22px;
+    padding: 0 18px;
   }
 }
 
-@media (max-width: 768px) {
+/* Medium Tablets Portrait (iPad Air, Surface, etc.) - 2 cards */
+@media (max-width: 899px) {
+  .product-carousel {
+    margin: 0 45px;
+  }
+  
+  .product-page {
+    gap: 30px; /* More space with only 2 cards */
+    padding: 0 20px;
+  }
+  
+  .carousel-btn {
+    width: 45px;
+    height: 45px;
+  }
+}
+
+/* Small Tablets Portrait - 2 cards */
+@media (max-width: 600px) {
   .product-carousel {
     margin: 0 40px;
   }
   
   .product-page {
-    gap: 20px;
+    gap: 25px;
+    padding: 0 15px;
+  }
+  
+  .carousel-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* Mobile - 1 card */
+@media (max-width: 480px) {
+  .product-carousel {
+    margin: 0 40px;
+  }
+  
+  .product-page {
+    gap: 0;
+    padding: 0 10px;
   }
   
   .carousel-btn {
     width: 40px;
     height: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .product-carousel {
-    margin: 0 30px;
-  }
-  
-  .product-page {
-    gap: 15px;
-    justify-content: center;
   }
 }
